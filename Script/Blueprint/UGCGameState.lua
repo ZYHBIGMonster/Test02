@@ -186,20 +186,15 @@ function UGCGameState:OnRep_CurrentGameState()
     local PlayerController= GameplayStatics.GetPlayerController(UGCGameSystem.GameState,0);
 
     local Character = PlayerController:GetPlayerCharacterSafety();
+    log_tree("@@@Character", Character)
+    log_tree("@@@CurrentGameState", self.CurrentGameState)
 
     if self.CurrentGameState ==TestMode.GameStateType.GamingState then
         if Character~=nil then
-            --ugcprint("GetCharacter");
+            log_tree("@@@TeamID", Character.TeamID)
             if Character.TeamID==TestMode.Camps.Hunter then
-                --ugcprint("Hunter");
                 UGCEventSystem:SendEvent(TestModeEventDfine.HunterUI);
-                -- local Asset = UE.LoadObject('/Game/Arts_Timeliness/GameMode/TeamCompetition/CG010/Arts_Player/Character/Mesh/CH_InfectedMan_02_SK.CH_InfectedMan_02_SK');
-                -- log_tree("@@@Asset", Asset);
-
-                -- log_tree("@@@Character.Mesh", Character.Mesh);
-
-                -- Character.Mesh:SetSkeletalMesh(self.HunterMesh,true,true)；
-    
+                Character.Mesh:SetSkeletalMesh(self.HunterMesh,true,true);
             end
             if Character.TeamID==TestMode.Camps.Cat then
                 
