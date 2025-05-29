@@ -3,21 +3,21 @@
 ---@field IfChangeMaterialDone bool
 ---@field IfChangeMaterialBack bool
 ---@field OriginalMaterials ULuaArrayHelper<UMaterialInstance>
+---@field HunterMesh USkeletalMesh
 --Edit Below--
 local UGCPlayerPawn = 
 {
-
    -- OriginMaterial={};
+   bInitMesh = false;
 }
  
 
 function UGCPlayerPawn:ReceiveBeginPlay()
-
+    print("UGCPlayerPawn:ReceiveBeginPlay")
 
     UGCPlayerPawn.SuperClass.ReceiveBeginPlay(self);
  
     self.OriginalMaterials = self.Mesh:GetMaterials();
-
 end
 
 function UGCPlayerPawn:Transtoabit()
@@ -76,6 +76,16 @@ function UGCPlayerPawn:ReceiveTick(DeltaTime)
 
     end
 
+    if not UGCGameSystem.IsServer() then
+        if not self.bInitMesh then
+            if UGCGameSystem.GameState and UGCGameSystem.GameState.CurrentGameState == TestMode.GameStateType.GamingState then
+                if self.TeamID and self.TeamID == TestMode.Camps.Hunter then
+                    self.bInitMesh = true
+                    self.Mesh:SetSkeletalMesh(self.HunterMesh,true,true);
+                end
+            end
+        end
+    end
 end
 
 
@@ -83,6 +93,12 @@ function UGCPlayerPawn:GetReplicatedProperties()
     return
     "IfChangeMaterial",
     "IfChangeMaterialBack";
+end
+
+---死亡盒子
+---@param EventInsigater AController
+function UGCPlayerPawn:IsSkipSpawnDeadTombBox(EventInsigater)
+    return true --不生成盒子
 end
 
 function UGCPlayerPawn:OnRep_IfChangeMaterial()

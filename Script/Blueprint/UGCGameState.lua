@@ -2,7 +2,6 @@
 ---@field AliveCatName ULuaArrayHelper<FString>
 ---@field HunterName ULuaArrayHelper<FString>
 ---@field DeadCatName ULuaArrayHelper<FString>
----@field HunterMesh USkeletalMesh
 --Edit Below--
 UGCGameSystem.UGCRequire('Script.Common.ue_enum_custom')
 require("Script.UGCEventSystem");
@@ -32,7 +31,7 @@ local UGCGameState =
     };
     --现在游戏状态
 
-    CurrentGameState=TestMode.ColorType.None;
+    CurrentGameState=TestMode.GameStateType.None;
 
     --现在隐藏色
 
@@ -186,15 +185,11 @@ function UGCGameState:OnRep_CurrentGameState()
     local PlayerController= GameplayStatics.GetPlayerController(UGCGameSystem.GameState,0);
 
     local Character = PlayerController:GetPlayerCharacterSafety();
-    log_tree("@@@Character", Character)
-    log_tree("@@@CurrentGameState", self.CurrentGameState)
 
     if self.CurrentGameState ==TestMode.GameStateType.GamingState then
         if Character~=nil then
-            log_tree("@@@TeamID", Character.TeamID)
             if Character.TeamID==TestMode.Camps.Hunter then
                 UGCEventSystem:SendEvent(TestModeEventDfine.HunterUI);
-                Character.Mesh:SetSkeletalMesh(self.HunterMesh,true,true);
             end
             if Character.TeamID==TestMode.Camps.Cat then
                 
