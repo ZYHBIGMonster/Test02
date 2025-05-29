@@ -19,8 +19,8 @@ bOpenItemEditor=1
 [MatchSetting]
 NumberOfTeams=1
 TeamPlayers=8
-bIsAllowStageMatching=0
-TeamSettings="{\"TeamSettings\": []}"
+bIsAllowStageMatching=1
+TeamSettings="{\"TeamSettings\": [{\"NumberOfTeams\": 1,\"TeamPlayers\": 8},{\"NumberOfTeams\": 1,\"TeamPlayers\": 6},{\"NumberOfTeams\": 1,\"TeamPlayers\": 4}]}"
 bEnableChat=0
 bEnableRoomChat=0
 ChannelName=全部
@@ -72,6 +72,6 @@ TargetPlatform=LinuxServer+WindowsNoEditor+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
 bRoomOB=0
-TeamPlayers=4,0;
+TeamPlayers=8,0;
 
 
