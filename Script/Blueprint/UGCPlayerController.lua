@@ -23,11 +23,19 @@ function UGCPlayerController:SetHunterMoveable(bMoveable)
             
             if self.Pawn.TeamID==TestMode.Camps.Hunter then
                 
-                --ugcprint("666");
+
+
 
                 UGCPawnSystem.DisabledPawnState(self.Pawn,EPawnState.Move,not bMoveable);
-                UGCAttributeSystem.SetGameAttributeValue(self.Pawn,"UGCGeneralMoveSpeedScale",1.6);
+                UGCAttributeSystem.SetGameAttributeValue(self.Pawn,"UGCGeneralMoveSpeedScale",1.3);
 
+                ugcprint("666");
+                ugcprint("UGCPlayerController:AddSkill");
+                local SkillPath = UGCMapInfoLib.GetRootLongPackagePath() .. "Asset/Blueprint/Prefabs/Skills/StunGrenade.StunGrenade_C"
+                log_tree("UGCPlayerController:AddSkill"..SkillPath);
+                local SkillClass = UGCObjectUtility.LoadClass(SkillPath)
+                log_tree("UGCPlayerController:AddSkill:",tostring(SkillClass));
+                UGCPersistEffectSystem.AddSkillByClass(self.Pawn, SkillClass)
 
                 --ugcprint("777");
             end
@@ -36,6 +44,9 @@ function UGCPlayerController:SetHunterMoveable(bMoveable)
     end
     
 end
+-- function UGCPlayerController:AddSkill(Pawn)
+
+-- end
 
 --[[
 function UGCPlayerController:ReceiveTick(DeltaTime)
