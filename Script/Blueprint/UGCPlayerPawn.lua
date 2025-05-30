@@ -1,4 +1,5 @@
 ---@class UGCPlayerPawn_C:BP_UGCPlayerPawn_C
+---@field Eye UWidget3DInstancedComponent
 ---@field IfChangeMaterial bool
 ---@field IfChangeMaterialDone bool
 ---@field IfChangeMaterialBack bool

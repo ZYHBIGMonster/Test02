@@ -37,6 +37,12 @@ function UGCPlayerController:SetHunterMoveable(bMoveable)
                 log_tree("UGCPlayerController:AddSkill:",tostring(SkillClass));
                 UGCPersistEffectSystem.AddSkillByClass(self.Pawn, SkillClass)
 
+                local SkillPath1 = UGCMapInfoLib.GetRootLongPackagePath() .. "Asset/Blueprint/Prefabs/Skills/SmellSkill.SmellSkill_C"
+                log_tree("UGCPlayerController:AddSkill"..SkillPath1);
+                local SkillClass1 = UGCObjectUtility.LoadClass(SkillPath1)
+                log_tree("UGCPlayerController:AddSkill:",tostring(SkillClass1));
+                UGCPersistEffectSystem.AddSkillByClass(self.Pawn, SkillClass1)
+
                 --ugcprint("777");
             end
         end

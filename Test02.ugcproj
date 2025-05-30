@@ -72,6 +72,6 @@ TargetPlatform=LinuxServer+WindowsNoEditor+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
 bRoomOB=0
-TeamPlayers=8,0;
+TeamPlayers=4,0;
 
 
