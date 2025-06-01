@@ -11,6 +11,7 @@ local UGCGameMode =
  end
 
  function UGCGameMode:ReceiveTick(DeltaTime)
+
     if self.IsChange then  
         if UGCGameSystem.GameState.CurrentGameState==TestMode.GameStateType.GamingState then
             --ugcprint("1");
@@ -48,11 +49,33 @@ local UGCGameMode =
 
                 if Distance<=TestMode.KillDistance then
 
+                     
                     UGCPawnAttrSystem.SetHealth(TheCat,0);
 
-                    ugcprint("chenggong");
-
                     self.LocalPlayerCat:Remove(TheCat);
+
+                    local CatPC=UGCGameSystem.GetPlayerControllerByPlayerPawn(TheCat);
+
+                    local OBPlayerKeys = {}
+
+                    local PlayerControllerList = UGCGameSystem.GetAllPlayerController()
+
+                    for _, PlayerController in ipairs(PlayerControllerList) do
+
+                      if PlayerController and PlayerController ~= self then
+
+                       table.insert(OBPlayerKeys, PlayerController.PlayerKey)
+
+                      end
+
+                     end
+                    UGCGameSystem.EnterSpectating(CatPC)   --进入观战
+                    
+                    UGCGameSystem.ChangeAllowOBPlayerKeys(CatPC, OBPlayerKeys)   --设置该玩家可以观战所有玩家。
+
+                    --ugcprint("chenggong");
+
+
                end
             end
         end
