@@ -44,6 +44,8 @@ function Action_RedistributeTeams:Execute(...)
 		if PlayerState then
 			print(string.format("Action_RedistributeTeams:Execute CatPlayerState[%s]", PlayerState.PlayerName));
 			UGCTeamSystem.ChangePlayerTeamID(PlayerState.PlayerKey, TestMode.Camps.Cat);
+			
+
 
 		else
 			print("Error: Action_RedistributeTeams:Execute CatPlayerState is nil!");
