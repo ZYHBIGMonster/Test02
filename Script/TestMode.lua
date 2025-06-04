@@ -25,7 +25,7 @@ TestMode.GameStateType=
     GameEndState="GameEndState";
 }
 
-TestMode.KillDistance = 100;
+TestMode.KillDistance = 200;
 
 TestMode.AllThePlayerNums1=4;
 

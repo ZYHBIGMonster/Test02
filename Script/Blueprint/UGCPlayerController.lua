@@ -23,9 +23,6 @@ function UGCPlayerController:SetHunterMoveable(bMoveable)
             
             if self.Pawn.TeamID==TestMode.Camps.Hunter then
                 
-
-
-
                 UGCPawnSystem.DisabledPawnState(self.Pawn,EPawnState.Move,not bMoveable);
                 UGCAttributeSystem.SetGameAttributeValue(self.Pawn,"UGCGeneralMoveSpeedScale",1.3);
 
@@ -42,6 +39,13 @@ function UGCPlayerController:SetHunterMoveable(bMoveable)
                 local SkillClass1 = UGCObjectUtility.LoadClass(SkillPath1)
                 log_tree("UGCPlayerController:AddSkill:",tostring(SkillClass1));
                 UGCPersistEffectSystem.AddSkillByClass(self.Pawn, SkillClass1)
+            elseif self.Pawn.TeamID==TestMode.Camps.Cat then
+
+				local SkillPath2 = UGCMapInfoLib.GetRootLongPackagePath() .. "Asset/Blueprint/Prefabs/Skills/BallSkill.BallSkill_C"
+                log_tree("UGCCat:AddSkill"..SkillPath2);
+                local SkillClass2 = UGCObjectUtility.LoadClass(SkillPath2)
+                log_tree("UGCCat:AddSkill:",tostring(SkillClass2));
+                UGCPersistEffectSystem.AddSkillByClass(self.Pawn, SkillClass2)
 
                 --ugcprint("777");
             end

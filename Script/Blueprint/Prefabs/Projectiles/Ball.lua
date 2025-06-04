@@ -3,36 +3,36 @@
 ---@field Sphere USphereComponent
 ---@field StaticMesh UStaticMeshComponent
 --Edit Below--
-local Ball = {}
+local ShootSkill = {}
 
 --[[
-function Ball:ReceiveLaunchBullet()
-    Ball.SuperClass.ReceiveLaunchBullet(self)
+function ShootSkill:ReceiveLaunchBullet()
+    ShootSkill.SuperClass.ReceiveLaunchBullet(self)
 end
 --]]
 
 --[[
-function Ball:ReceiveOnImpact(HitResult)
-    Ball.SuperClass.ReceiveOnImpact(self,HitResult)
+function ShootSkill:ReceiveOnImpact(HitResult)
+    ShootSkill.SuperClass.ReceiveOnImpact(self,HitResult)
 end
 --]]
 
 --[[
-function Ball:ReceiveOnBounce(HitResult, ImpactVelocity)
-    Ball.SuperClass.ReceiveOnBounce(self,HitResult, ImpactVelocity)
+function ShootSkill:ReceiveOnBounce(HitResult, ImpactVelocity)
+    ShootSkill.SuperClass.ReceiveOnBounce(self,HitResult, ImpactVelocity)
 end
 --]]
 
 --[[
-function Ball:ReceivePlayExplosionEffect(ExplosionTarget)
-    Ball.SuperClass.ReceivePlayExplosionEffect(self,ExplosionTarget)
+function ShootSkill:ReceivePlayExplosionEffect(ExplosionTarget)
+    ShootSkill.SuperClass.ReceivePlayExplosionEffect(self,ExplosionTarget)
 end
 --]]
 
 --[[
-function Ball:TickMovementPath(DeltaTime)
-    Ball.SuperClass.TickMovementPath(self,DeltaTime)
+function ShootSkill:TickMovementPath(DeltaTime)
+    ShootSkill.SuperClass.TickMovementPath(self,DeltaTime)
 end
 --]]
 
-return Ball
+return ShootSkill
