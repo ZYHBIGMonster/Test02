@@ -11,7 +11,6 @@ TestMode.ColorType=
     Pink=3;
     Yellow=4;
     Orange=5;
-    Black=6;
 }
 TestMode.Camps = 
 {
@@ -44,8 +43,9 @@ TestMode.TheColor=
 
     Orange={R=1.000000,G=0.387454,B=0.000000,A=1.000000};
 
-    Black={R=0.000000,G=0.000000,B=0.000000,A=1.000000};
 
 }
 
 TestMode.GameResultTable={};
+
+TestMode.ColorNums=5;

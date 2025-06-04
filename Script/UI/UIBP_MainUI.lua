@@ -320,10 +320,6 @@ function UIBP_MainUI:OnColorChange(ColorType)
         ugcprint("橙色");
         self.Image_ColorRemainTime:SetColorAndOpacity(TestMode.TheColor.Orange);
     end
-    if ColorType==6 then
-        ugcprint("黑色");
-        self.Image_ColorRemainTime:SetColorAndOpacity(TestMode.TheColor.Black);
-    end
 end
 function UIBP_MainUI:OnReadyStateRemainTimeChange(RemainTime)
 

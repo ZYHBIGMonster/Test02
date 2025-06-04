@@ -7,7 +7,7 @@ local Action_ChangeColor = {
 -- 触发器激活时，将执行Action的Execute
 function Action_ChangeColor:Execute(...)
 
-    UGCGameSystem.GameState.CurrentColorType=math.random(6);
+    UGCGameSystem.GameState.CurrentColorType=math.random(TestMode.ColorNums);
 
     return true
 end

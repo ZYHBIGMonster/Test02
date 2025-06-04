@@ -75,70 +75,72 @@ function bp_Color_Base:ReceiveBeginPlay()
 	
 	bp_Color_Base.SuperClass.ReceiveBeginPlay(self)
 
+
+
 	if self:HasAuthority() then
 
-		ugcprint("1")
+		self.ColorValue=math.random(TestMode.ColorNums);
+
+		--ugcprint("1")
 		local Cube= UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Cube.Cube'));
-		ugcprint("2")
+		--ugcprint("2")
 		local Sphere=UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Sphere.Sphere'));
-		ugcprint("3")
+		--ugcprint("3")
 		local Si=UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/tetrahedro.tetrahedro'));
-		ugcprint("4")
+		--ugcprint("4")
 		local Num=math.random(3);
 		if Num==1 then
 			self.StaticMesh:SetStaticMesh(Cube);
-			ugcprint("5")
+			--ugcprint("5")
 		end
 		if Num==2 then
 			self.StaticMesh:SetStaticMesh(Sphere);
-			ugcprint("5")
+			--ugcprint("5")
 		end
 		if Num==3 then
 			self.StaticMesh:SetStaticMesh(Si);
-			ugcprint("5")
+			--ugcprint("5")
 		end
 	end
-
-		local Blue = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Blue.Blue'));
-		local Green = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Green.Green'));
-		local Pink = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Pink.Pink'));
-		local Yellow = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Yellow.Yellow'));
-		local Orange = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Orange.Orange'));
-		local Black = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Black.Black'));
-
-		if self.ColorValue==1 then
-			self.StaticMesh:SetMaterial(0,Blue);
-			print("ColorValueis1,ThisisBlue");
-		end
-		if self.ColorValue==2 then
-			self.StaticMesh:SetMaterial(0,Green);
-			print("ColorValueis1,ThisisGreen");
-		end
-		if self.ColorValue==3 then
-			self.StaticMesh:SetMaterial(0,Pink);
-			ugcprint("8")
-		end
-		if self.ColorValue==4 then
-			self.StaticMesh:SetMaterial(0,Yellow);
-			ugcprint("9")
-		end
-		if self.ColorValue==5 then
-			self.StaticMesh:SetMaterial(0,Orange);
-			ugcprint("10")
-		end
-		if self.ColorValue==6 then
-			self.StaticMesh:SetMaterial(0,Black);
-			ugcprint("11")
-		end
-
-
-
-
 
     print("BoxPrint");
     self.LuaInit(self);
 end
 
+function bp_Color_Base:GetReplicatedProperties()
+	return
+	"ColorValue";
+end
+
+function bp_Color_Base:OnRep_ColorValue()
+	
+	local Blue = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Blue.Blue'));
+	local Green = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Green.Green'));
+	local Pink = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Pink.Pink'));
+	local Yellow = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Yellow.Yellow'));
+	local Orange = UE.LoadObject(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/ColorMesh/Orange.Orange'));
+
+	if self.ColorValue==1 then
+		self.StaticMesh:SetMaterial(0,Blue);
+		print("ColorValueis1,ThisisBlue");
+	end
+	if self.ColorValue==2 then
+		self.StaticMesh:SetMaterial(0,Green);
+		print("ColorValueis1,ThisisGreen");
+	end
+	if self.ColorValue==3 then
+		self.StaticMesh:SetMaterial(0,Pink);
+		ugcprint("8")
+	end
+	if self.ColorValue==4 then
+		self.StaticMesh:SetMaterial(0,Yellow);
+		ugcprint("9")
+	end
+	if self.ColorValue==5 then
+		self.StaticMesh:SetMaterial(0,Orange);
+		ugcprint("10")
+	end
+end
 function bp_Color_Base:LuaInit()
 	if self.bInitDoOnce then
 		return;
