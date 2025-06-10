@@ -185,10 +185,6 @@ function bp_Color_Base:Box_OnComponentBeginOverlap(OverlappedComponent, OtherAct
 
 	if self:HasAuthority() == false then
 
-		local Playercontroller=OtherActor:GetPlayerControllerSafety();
-
-	    if Playercontroller then
-
 		  if OtherActor.TeamID==TestMode.Camps.Cat then
 			
 			if UGCGameSystem.GameState.CurrentColorType==self.ColorValue then
@@ -199,7 +195,6 @@ function bp_Color_Base:Box_OnComponentBeginOverlap(OverlappedComponent, OtherAct
 
 		 end
 		
-		end
 	end
 	
 	return nil;
@@ -243,10 +238,6 @@ function bp_Color_Base:Box_OnComponentEndOverlap(OverlappedComponent, OtherActor
 
 	if self:HasAuthority()==false then
 
-		local Playercontroller=OtherActor:GetPlayerControllerSafety();
-
-	    if Playercontroller then
-
 		if OtherActor.TeamID==TestMode.Camps.Cat then
 			
 			if UGCGameSystem.GameState.CurrentColorType==self.ColorValue then
@@ -256,8 +247,6 @@ function bp_Color_Base:Box_OnComponentEndOverlap(OverlappedComponent, OtherActor
 			end
 
 		 end
-		
-		end
 	end
 	return nil;
 end
