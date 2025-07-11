@@ -48,4 +48,4 @@ TestMode.TheColor=
 
 TestMode.GameResultTable={};
 
-TestMode.ColorNums=5;
+TestMode.ColorNums=4;

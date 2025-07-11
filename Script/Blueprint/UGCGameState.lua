@@ -50,6 +50,14 @@ local UGCGameState =
 
     i=true;
 
+    ii=true;
+
+    Bgm_int=0;
+
+    MainControlPanel=nil;
+
+    AliveCat=0;
+
 }; 
 function UGCGameState:ReceiveBeginPlay()
 
@@ -63,7 +71,26 @@ function UGCGameState:ReceiveBeginPlay()
         self:InitUI();
     end
 
+    self.MainControlPanel = GameBusinessManager.GetWidgetFromName(ingame, "MainControlPanelTochButton_C");
+    
+    --隐藏部分不需要的UI
+    if self.MainControlPanel ~= nil then
 
+        local MainControlBaseUI = self.MainControlPanel.MainControlBaseUI;
+        MainControlBaseUI.NavigatorPanel:SetVisibility(ESlateVisibility.Collapsed);
+        MainControlBaseUI.CanvasPanelSurviveKill:SetVisibility(ESlateVisibility.Collapsed);
+        MainControlBaseUI.SignalReceivingAreaTIPS_UIBP:SetVisibility(ESlateVisibility.Collapsed);
+        MainControlBaseUI.CircleChasingProgress:SetVisibility(ESlateVisibility.Collapsed);
+        MainControlBaseUI.SurviveInfoPanel:SetVisibility(ESlateVisibility.Collapsed);
+
+        -- self.MainControlPanel.ShootingUIPanel.SwitchWeaponSlot_Mode2.Image_Selected:SetVisibility(ESlateVisibility.Collapsed);
+        -- self.MainControlPanel.ShootingUIPanel.SwitchWeaponSlot_Mode2.Image_Selected:SetVisibility(ESlateVisibility.Collapsed);
+        --MainControlBaseUI.Ingame_TeamPanel_BP:SetVisibility(ESlateVisibility.Collapsed);
+
+        MainControlBaseUI.IsNeedTeamPanel = false;
+    else
+        print("Error: PeekabooUIManager:InitBaseUI MainControlPanel == nil!");
+    end
 end
 
 function UGCGameState:InitUI()
@@ -87,11 +114,27 @@ function UGCGameState:InitUI()
     if MainUI~=nil then
         MainUI:AddToViewport();
     end
-
-    
 end
 
 function UGCGameState:ReceiveTick(DeltaTime)
+
+    if self:HasAuthority()==false then
+        if self.CurrentGameState==TestMode.GameStateType.GamingState then
+            if self.ii then
+              local AudioPath =UE.LoadObject('/Game/WwiseEvent/Ambient/Play_Ambient_Leaf_Music.Play_Ambient_Leaf_Music')
+              self.Bgm_int=UGCSoundManagerSystem.PlaySound2D(AudioPath)
+              self.ii=false
+            end
+        end
+    end
+    
+    if self:HasAuthority()==false then
+
+        if self.CurrentGameState==TestMode.GameStateType.GameEndState then
+            UGCSoundManagerSystem.StopSoundByID(self.Bgm_int)
+        end
+    end
+
 
     if self:HasAuthority() then
 
@@ -124,6 +167,8 @@ function UGCGameState:ReceiveTick(DeltaTime)
          
                 end
     
+                self.AliveCat=self.AliveCatName:Num();
+
                 self.i=false;
     
             end
@@ -141,8 +186,16 @@ function UGCGameState:GetReplicatedProperties()
     "CurrentGameState",
     "ColorChangeRemainTime",
     "MoveRemainTime",
-    "CurrentColorType";
+    "CurrentColorType",
+    "AliveCat";
 end
+
+function UGCGameState:OnRep_AliveCat()
+
+    UGCEventSystem:SendEvent(TestModeEventDfine.AliveCat,self.AliveCat);
+    
+end
+
 function UGCGameState:OnRep_CurrentColorType()
     
     UGCEventSystem:SendEvent(TestModeEventDfine.ColorChange,self.CurrentColorType);

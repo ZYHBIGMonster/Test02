@@ -1,10 +1,12 @@
 ---@class UIBP_MainUI_C:UUserWidget
+---@field Border_0 UBorder
 ---@field HorizontalBox_0 UHorizontalBox
 ---@field HorizontalBox_1 UHorizontalBox
 ---@field Image_ColorRemainTime UImage
 ---@field Image_Titile UImage
 ---@field SizeBox_0 USizeBox
 ---@field Text_RemainTime UTextBlock
+---@field TextBlock_74 UTextBlock
 ---@field TextBlock_360 UTextBlock
 ---@field TextBlock_362 UTextBlock
 ---@field UI_End UI_End_C
@@ -22,6 +24,7 @@ local UIBP_MainUI =
 function UIBP_MainUI:Construct()
 
     self:EventBind();
+    -- UGCWidgetManagerSystem.HideWidget("MainUI_SurviveInfo_Btn_C_0")
 end
 
 
@@ -36,10 +39,26 @@ function UIBP_MainUI:EventBind()
     UGCEventSystem:AddListener(TestModeEventDfine.ColorChange,self.OnColorChange,self);
     UGCEventSystem:AddListener(TestModeEventDfine.HunterMovbleRemainTimeChange,self.HunterMove,self);
     UGCEventSystem:AddListener(TestModeEventDfine.GameEnd,self.OnGameEnd,self);
+    UGCEventSystem:AddListener(TestModeEventDfine.AliveCat,self.OnAliveCatChange,self);
+end
 
+function UIBP_MainUI:OnAliveCatChange(AliveCat)
+
+    if UGCGameSystem.GameState.CurrentGameState~=TestMode.GameStateType.GamingState then
+        return;
+    end
+
+    self.Border_0:SetVisibility(ESlateVisibility.SelfHitTestInvisible);
+
+    self.TextBlock_74:SetText(tostring(AliveCat));
+    if AliveCat == 0 then
+        self.TextBlock_74:SetText("0");
+    end
 end
 
 function UIBP_MainUI:OnGameEnd(AliveCatName,HunterName,DeadCatName)
+
+    -- self.TextBlock_74:SetText(tostring(AliveCatName:Num()));
 
     local LocalAddClass = UE.LoadClass(UGCMapInfoLib.GetRootLongPackagePath().. "Asset/UI/UI_Add.UI_Add_C");
 

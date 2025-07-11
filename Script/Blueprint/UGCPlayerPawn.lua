@@ -10,6 +10,7 @@ local UGCPlayerPawn =
 {
    -- OriginMaterial={};
    bInitMesh = false;
+   ii=true;
 }
  
 
@@ -19,6 +20,9 @@ function UGCPlayerPawn:ReceiveBeginPlay()
     UGCPlayerPawn.SuperClass.ReceiveBeginPlay(self);
  
     self.OriginalMaterials = self.Mesh:GetMaterials();
+
+   
+
 end
 
 function UGCPlayerPawn:Transtoabit()
@@ -76,6 +80,7 @@ function UGCPlayerPawn:ReceiveTick(DeltaTime)
         self:Transtoabit();
 
     end
+
 
     if not UGCGameSystem.IsServer() then
         if not self.bInitMesh then

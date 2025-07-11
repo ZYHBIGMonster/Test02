@@ -11,4 +11,5 @@ TestModeEventDfine.HunterMovbleRemainTimeChange  =107;
 TestModeEventDfine.ColorChange                   =108;
 
 TestModeEventDfine.GameEnd                       =109;
+TestModeEventDfine.AliveCat                      =110;
 return TestModeEventDfine

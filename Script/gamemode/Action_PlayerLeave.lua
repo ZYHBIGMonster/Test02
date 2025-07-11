@@ -9,6 +9,12 @@
 function Action_PlayerLeave:Execute(...)
     ugcprint(string.format("[Action_PlayerLeave] Start settlement %d", self.PlayerKey));
     UGCGameSystem.SendPlayerSettlement(self.PlayerKey);
+    local TheCat = UGCGameSystem.GetPlayerPawnByPlayerKey(self.PlayerKey);
+    if TheCat == nil then
+        ugcprint(string.format("[Action_PlayerLeave] Error: PlayerState is nil for PlayerKey %d", self.PlayerKey));
+        return false;
+    end
+    UGCPawnAttrSystem.SetHealth(TheCat,0);
     return true
 end
 
