@@ -45,6 +45,12 @@ function Action_TeamAliveNumCheck:Execute()
         end
 	end
 
+	if UGCGameSystem.GameState.AliveCat==0 then
+
+		ugcprint("AliveCat[%d]", UGCGameSystem.GameState.AliveCat);
+		LuaQuickFireEvent(self.TeamAllDeadEvent, self, TeamID);
+
+	end
 	return true;
 end
 

@@ -7,7 +7,8 @@ local Action_ReturnToLobby = {
 -- 触发器激活时，将执行Action的Execute
 function Action_ReturnToLobby:Execute(...)
 
-    UGCGameSystem.ReturnToLobby();
+    UGCGameSystem.GameState.CurrentGameState = TestMode.GameState.Lobby
+    
     return true
 end
 

@@ -82,11 +82,10 @@ function UGCGameState:ReceiveBeginPlay()
         MainControlBaseUI.SignalReceivingAreaTIPS_UIBP:SetVisibility(ESlateVisibility.Collapsed);
         MainControlBaseUI.CircleChasingProgress:SetVisibility(ESlateVisibility.Collapsed);
         MainControlBaseUI.SurviveInfoPanel:SetVisibility(ESlateVisibility.Collapsed);
+        MainControlBaseUI.CanvasPanel_FreeCamera:SetVisibility(ESlateVisibility.Collapsed);
+        -- MainControlBaseUI.CanvasPanel_MiniMapAndSetting:SetVisibility(ESlateVisibility.Collapsed);
 
-        -- self.MainControlPanel.ShootingUIPanel.SwitchWeaponSlot_Mode2.Image_Selected:SetVisibility(ESlateVisibility.Collapsed);
-        -- self.MainControlPanel.ShootingUIPanel.SwitchWeaponSlot_Mode2.Image_Selected:SetVisibility(ESlateVisibility.Collapsed);
-        --MainControlBaseUI.Ingame_TeamPanel_BP:SetVisibility(ESlateVisibility.Collapsed);
-
+        ugcprint("PeekabooUIManager:InitBaseUI");
         MainControlBaseUI.IsNeedTeamPanel = false;
     else
         print("Error: PeekabooUIManager:InitBaseUI MainControlPanel == nil!");
@@ -261,6 +260,12 @@ function UGCGameState:OnRep_CurrentGameState()
 
         ugcprint("GameEnd");
 
+    end
+
+    if self.CurrentGameState==TestMode.GameStateType.Lobby then
+
+        UGCGameSystem.ReturnToLobby();
+        ugcprint("ReturnToLobby");
     end
 
 end

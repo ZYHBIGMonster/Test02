@@ -23,6 +23,7 @@ TestMode.GameStateType=
     None="None";
     GamingState="GamingState";
     GameEndState="GameEndState";
+    Lobby="LobbyState";
 }
 
 TestMode.KillDistance = 200;

@@ -60,6 +60,12 @@ function UIBP_MainUI:OnGameEnd(AliveCatName,HunterName,DeadCatName)
 
     -- self.TextBlock_74:SetText(tostring(AliveCatName:Num()));
 
+    local PC = STExtraGameplayStatics.GetFirstPlayerController(self)
+    if PC then
+        PC:CastUIMsg("MainControlPanel_HideAllUI", "ingame");
+    else
+        print("Error: PeekabooSettlementUI:ShowReult PC is nil!")
+    end
     local LocalAddClass = UE.LoadClass(UGCMapInfoLib.GetRootLongPackagePath().. "Asset/UI/UI_Add.UI_Add_C");
 
     local PlayerController=GameplayStatics.GetPlayerController(UGCGameSystem.GameState, 0);

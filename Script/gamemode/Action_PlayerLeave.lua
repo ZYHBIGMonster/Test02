@@ -8,13 +8,16 @@
 -- 触发器激活时，将执行Action的Execute
 function Action_PlayerLeave:Execute(...)
     ugcprint(string.format("[Action_PlayerLeave] Start settlement %d", self.PlayerKey));
-    UGCGameSystem.SendPlayerSettlement(self.PlayerKey);
+
     local TheCat = UGCGameSystem.GetPlayerPawnByPlayerKey(self.PlayerKey);
     if TheCat == nil then
         ugcprint(string.format("[Action_PlayerLeave] Error: PlayerState is nil for PlayerKey %d", self.PlayerKey));
         return false;
     end
     UGCPawnAttrSystem.SetHealth(TheCat,0);
+
+    UGCGameSystem.SendPlayerSettlement(self.PlayerKey);
+    
     return true
 end
 
