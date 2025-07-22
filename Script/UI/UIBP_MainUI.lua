@@ -393,6 +393,22 @@ function UIBP_MainUI:OnGameEndRemainTimeChange(RemainTime)
     
    -- ugcprint("666");
     self.Text_RemainTime:SetText(tostring(RemainTime));
+    if RemainTime==0 then
+
+        local PlayerController = STExtraGameplayStatics.GetFirstPlayerController(self);
+
+        if PlayerController then
+
+           PlayerController:ExitGame();
+
+        else
+            
+        print("PeekabooSettlementUI:Button_Back_OnClicked PlayerController is nil");
+    end
+
+    UGCGameSystem.ReturnToLobby();
+    end
+
 end
 
 function UIBP_MainUI:HunterUI()
