@@ -358,29 +358,13 @@ function UIBP_MainUI:OnReadyStateRemainTimeChange(RemainTime)
 
 end
 
-function UIBP_MainUI:OnGameStateRemainTimeChange(RemainTime)
+function UIBP_MainUI:OnGameStateRemainTimeChange(RemainTime,colortime)
 
     self.Text_RemainTime:SetText(tostring(RemainTime));
 
+    self.TextBlock_360:SetText(tostring(colortime));
 
-    if RemainTime==360 then
-
-        self.i=11;
     
-    end
-
-    local ColorRemainTime=RemainTime-30*(self.i);
-
-    if ColorRemainTime==0 then
-
-        self.i=self.i-1;
-
-    end
-
-    ColorRemainTime=RemainTime-30*(self.i);
-
-    self.TextBlock_360:SetText(tostring(ColorRemainTime));
-
     if RemainTime==0 then
 
         self.Text_RemainTime:SetText(tostring(10));

@@ -52,11 +52,15 @@ local UGCGameState =
 
     ii=true;
 
+    ColorchangeTime=-1;
+
     Bgm_int=0;
 
     MainControlPanel=nil;
 
     AliveCat=0;
+
+    iii=16;
 
 }; 
 function UGCGameState:ReceiveBeginPlay()
@@ -65,6 +69,8 @@ function UGCGameState:ReceiveBeginPlay()
     require("Script.TestMode");
     require("Script.TestModeEventDfine");
     self.SuperClass.ReceiveBeginPlay(self);
+
+    self.iii=math.ceil(TestMode.MaxGametime/30);
 
     if self:HasAuthority()==false then
         --ugcprint("UICreate");
@@ -186,6 +192,7 @@ function UGCGameState:GetReplicatedProperties()
     "ColorChangeRemainTime",
     "MoveRemainTime",
     "CurrentColorType",
+    "ColorchangeTime",
     "AliveCat";
 end
 
@@ -220,7 +227,7 @@ end
 
 function UGCGameState:OnRep_GameStateRemainTime()
 
-    UGCEventSystem:SendEvent(TestModeEventDfine.GameStateRemainTimeChange,self.GameStateRemainTime);
+    UGCEventSystem:SendEvent(TestModeEventDfine.GameStateRemainTimeChange,self.GameStateRemainTime,self.ColorchangeTime);
     
 end
 
@@ -265,6 +272,7 @@ function UGCGameState:OnRep_CurrentGameState()
     if self.CurrentGameState==TestMode.GameStateType.Lobby then
 
         UGCGameSystem.ReturnToLobby();
+
         ugcprint("ReturnToLobby");
     end
 

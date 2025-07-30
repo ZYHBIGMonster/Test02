@@ -13,10 +13,7 @@ local bp_Color_Base =
 
 function bp_Color_Base:ReceiveTick(DeltaTime)
 
-
-
 	bp_Color_Base.SuperClass.ReceiveTick(self,DeltaTime);
-
 
 if self:HasAuthority() then
 

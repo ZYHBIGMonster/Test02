@@ -21,7 +21,7 @@ function Action_PlayerKillsRecord:Execute()
        LocalGameState.AliveCatName:Remove(PlayerState.PlayerName);
           -- ugcprint("Kill4");
 
-       LocalGameState.AliveCat=LocalGameState.AliveCat-1;
+      --  LocalGameState.AliveCat=LocalGameState.AliveCat-1;
 
     end
   --  ugcprint("Kill2");

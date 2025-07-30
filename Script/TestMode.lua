@@ -50,3 +50,5 @@ TestMode.TheColor=
 TestMode.GameResultTable={};
 
 TestMode.ColorNums=4;
+
+TestMode.MaxGametime=480;

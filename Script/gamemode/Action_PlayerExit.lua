@@ -10,6 +10,12 @@ function Action_PlayerExit:Execute()
 	UGCGameSystem.SendPlayerSettlement(self.ExitKey);
 
 	local PlayerState = UGCGameSystem.GetPlayerStateByPlayerKey(self.ExitKey); 
+	
+	if PlayerState.TeamID==TestMode.Camps.Cat then
+
+		UGCGameSystem.GameState.AliveCat=UGCGameSystem.GameState.AliveCat-1;
+		
+	end
 	if PlayerState then
 		local PlayerKeys = UGCTeamSystem.GetPlayerKeysByTeamID(PlayerState.TeamID);
 		print(string.format("Action_PlayerExit:Execute #PlayerKeys[%d]", #PlayerKeys));
