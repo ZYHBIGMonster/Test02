@@ -2,6 +2,7 @@
 ---@field AliveCatName ULuaArrayHelper<FString>
 ---@field HunterName ULuaArrayHelper<FString>
 ---@field DeadCatName ULuaArrayHelper<FString>
+---@field HunterUI bool
 --Edit Below--
 UGCGameSystem.UGCRequire('Script.Common.ue_enum_custom')
 require("Script.UGCEventSystem");
@@ -61,6 +62,8 @@ local UGCGameState =
     AliveCat=0;
 
     iii=16;
+
+    TimeToZero=-1;
 
 }; 
 function UGCGameState:ReceiveBeginPlay()
@@ -193,7 +196,24 @@ function UGCGameState:GetReplicatedProperties()
     "MoveRemainTime",
     "CurrentColorType",
     "ColorchangeTime",
-    "AliveCat";
+    "AliveCat",
+    "TimeToZero",
+    "HunterUI";
+end
+
+function UGCGameState:OnRep_HunterUI()
+
+    if self.HunterUI==true then
+
+      UGCEventSystem:SendEvent(TestModeEventDfine.TheHunterUI,self.HunterUI);
+        
+    end
+
+end
+function UGCGameState:OnRep_TimeToZero()
+
+    UGCEventSystem:SendEvent(TestModeEventDfine.TimeToZero,self.TimeToZero);     
+    
 end
 
 function UGCGameState:OnRep_AliveCat()
@@ -248,7 +268,7 @@ function UGCGameState:OnRep_CurrentGameState()
     if self.CurrentGameState ==TestMode.GameStateType.GamingState then
         if Character~=nil then
             if Character.TeamID==TestMode.Camps.Hunter then
-                UGCEventSystem:SendEvent(TestModeEventDfine.HunterUI);
+                UGCEventSystem:SendEvent(TestModeEventDfine.HunterUI,self.TimeToZero);
             end
             if Character.TeamID==TestMode.Camps.Cat then
                 

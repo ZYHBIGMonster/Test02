@@ -13,8 +13,9 @@ function SetHunterCannotMove:Execute(...)
 
     for Key, PC in pairs(PlayerController) do
         
-        PC:SetHunterMoveable(false);
+        PC.ifCanMove = false; -- 设置猎人不能移动
 
+        PC:SetHunterMoveable(false); -- 调用设置猎人移动状态的函数
         --ugcprint("zhicingchengg")
     end
     

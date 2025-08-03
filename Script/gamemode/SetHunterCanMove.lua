@@ -11,9 +11,12 @@ function SetHunterCanMove:Execute(...)
 
     for Key, PC in pairs(PlayerController) do
         
-        PC:SetHunterMoveable(true);
+        PC.ifCanMove = true; -- 设置猎人可以移动
 
+        PC:SetHunterMoveable(true); -- 调用设置猎人移动状态的函数
     end
+
+    UGCGameSystem.GameState.HunterUI = true; -- 设置猎人UI可见
 
     return true
 end

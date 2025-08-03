@@ -12,4 +12,6 @@ TestModeEventDfine.ColorChange                   =108;
 
 TestModeEventDfine.GameEnd                       =109;
 TestModeEventDfine.AliveCat                      =110;
+TestModeEventDfine.TimeToZero                    =111;
+TestModeEventDfine.TheHunterUI                   =112;
 return TestModeEventDfine

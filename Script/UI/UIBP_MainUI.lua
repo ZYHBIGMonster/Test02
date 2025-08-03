@@ -40,6 +40,27 @@ function UIBP_MainUI:EventBind()
     UGCEventSystem:AddListener(TestModeEventDfine.HunterMovbleRemainTimeChange,self.HunterMove,self);
     UGCEventSystem:AddListener(TestModeEventDfine.GameEnd,self.OnGameEnd,self);
     UGCEventSystem:AddListener(TestModeEventDfine.AliveCat,self.OnAliveCatChange,self);
+    UGCEventSystem:AddListener(TestModeEventDfine.TimeToZero,self.OnTimeToZero,self);
+    UGCEventSystem:AddListener(TestModeEventDfine.TheHunterUI,self.OnTheHunterUI,self);
+end
+
+function UIBP_MainUI:OnTheHunterUI(HunterUI)
+    
+    if HunterUI==true then
+    self.HorizontalBox_1:SetVisibility(ESlateVisibility.Collapsed);
+        
+    end
+
+end
+
+function UIBP_MainUI:OnTimeToZero(TimeToZero)
+
+    if TimeToZero==0 then
+
+    self.HorizontalBox_1:SetVisibility(ESlateVisibility.Collapsed);
+        
+    end
+
 end
 
 function UIBP_MainUI:OnAliveCatChange(AliveCat)
@@ -313,13 +334,8 @@ function UIBP_MainUI:CatSettlementInit(Theslot)
 end
 function UIBP_MainUI:HunterMove(RemainTime)
     
-
     self.TextBlock_362:SetText(tostring(RemainTime));
     
-    if RemainTime==0 then
-        self.HorizontalBox_1:SetVisibility(ESlateVisibility.Collapsed);
-    end
-
 end
 
 function UIBP_MainUI:OnColorChange(ColorType)
@@ -353,7 +369,7 @@ function UIBP_MainUI:OnReadyStateRemainTimeChange(RemainTime)
     end
 
     if RemainTime==0 then
-        self.Text_RemainTime:SetText(tostring(360)); 
+        self.Text_RemainTime:SetText(tostring(TestMode.MaxGametime)); 
     end
 
 end
@@ -395,10 +411,14 @@ function UIBP_MainUI:OnGameEndRemainTimeChange(RemainTime)
 
 end
 
-function UIBP_MainUI:HunterUI()
+function UIBP_MainUI:HunterUI(Time)
 
+if Time ==-1 then
+
+      self.HorizontalBox_1:SetVisibility(ESlateVisibility.SelfHitTestInvisible);
+        
+    end
     --ugcprint("HunterUI");
-    self.HorizontalBox_1:SetVisibility(ESlateVisibility.SelfHitTestInvisible);
 
 end
 

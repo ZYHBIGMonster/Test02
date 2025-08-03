@@ -3,9 +3,8 @@
 --Edit Below--
 local UGCPlayerController =
  {
-
-
     doonce=true;
+    ifCanMove=true;
  }
  
 
@@ -13,6 +12,15 @@ function UGCPlayerController:ReceiveBeginPlay()
 
     UGCPlayerController.SuperClass.ReceiveBeginPlay(self)
 
+end
+
+function UGCPlayerController:GetReplicatedProperties()
+    return
+    "ifCanMove";
+end
+
+function UGCPlayerController:OnRep_ifCanMove()
+    self:SetHunterMoveable(self.ifCanMove);
 end
 
 function UGCPlayerController:SetHunterMoveable(bMoveable)
