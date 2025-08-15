@@ -11,8 +11,7 @@ local UGCGameMode =
  end
 
  function UGCGameMode:ReceiveTick(DeltaTime)
-
-    if self.IsChange then  
+    
         if UGCGameSystem.GameState.CurrentGameState==TestMode.GameStateType.GamingState then
             --ugcprint("1");
             local LocalPlayerPawn=UGCGameSystem.GetAllPlayerPawn();
@@ -34,51 +33,63 @@ local UGCGameMode =
 
             end
         end
-    end
-       for key, TheHunter in pairs(self.LocalPlayerHunter) do
 
-           local Position1=TheHunter:K2_GetActorLocation();
+    for key, TheHunter in pairs(self.LocalPlayerHunter) do
+
+        if TheHunter==nil then
+
+            self.LocalPlayerHunter:Remove(TheHunter);
+
+        else
+
+        local Position1=TheHunter:K2_GetActorLocation();
 
             for key, TheCat in pairs(self.LocalPlayerCat)  do
 
-                local Position2=TheCat:K2_GetActorLocation();
-
-                local Distance=math.sqrt((Position2.X-Position1.X)*(Position2.X-Position1.X)+(Position2.Y-Position1.Y)*(Position2.Y-Position1.Y)+(Position2.Z-Position1.Z)*(Position2.Z-Position1.Z));
-
-                --ugcprint("%d",Distance);
-
-                if Distance<=TestMode.KillDistance then
-
-                     
-                    UGCPawnAttrSystem.SetHealth(TheCat,0);
-
+                if  TheCat==nil then
                     self.LocalPlayerCat:Remove(TheCat);
+                else  
 
-                    local CatPC=UGCGameSystem.GetPlayerControllerByPlayerPawn(TheCat);
+                    local Position2=TheCat:K2_GetActorLocation();
 
-                    local OBPlayerKeys = {}
-
-                    local PlayerControllerList = UGCGameSystem.GetAllPlayerController()
-
-                    for _, PlayerController in ipairs(PlayerControllerList) do
-
-                      if PlayerController and PlayerController ~= self then
-
-                       table.insert(OBPlayerKeys, PlayerController.PlayerKey)
-
-                      end
-
-                     end
-                    UGCGameSystem.EnterSpectating(CatPC)   --进入观战
-                    
-                    UGCGameSystem.ChangeAllowOBPlayerKeys(CatPC, OBPlayerKeys)   --设置该玩家可以观战所有玩家。
-
-                    --ugcprint("chenggong");
-
-
-               end
+                    local Distance=math.sqrt((Position2.X-Position1.X)*(Position2.X-Position1.X)+(Position2.Y-Position1.Y)*(Position2.Y-Position1.Y)+(Position2.Z-Position1.Z)*(Position2.Z-Position1.Z));
+    
+                    --ugcprint("%d",Distance);
+    
+                    if Distance<=TestMode.KillDistance then
+    
+                         
+                        UGCPawnAttrSystem.SetHealth(TheCat,0);
+    
+                        self.LocalPlayerCat:Remove(TheCat);
+    
+                        local CatPC=UGCGameSystem.GetPlayerControllerByPlayerPawn(TheCat);
+    
+                        local OBPlayerKeys = {}
+    
+                        local PlayerControllerList = UGCGameSystem.GetAllPlayerController()
+    
+                        for _, PlayerController in ipairs(PlayerControllerList) do
+    
+                          if PlayerController and PlayerController ~= self then
+    
+                           table.insert(OBPlayerKeys, PlayerController.PlayerKey)
+    
+                          end
+    
+                         end
+                        UGCGameSystem.EnterSpectating(CatPC)   --进入观战
+                        
+                        UGCGameSystem.ChangeAllowOBPlayerKeys(CatPC, OBPlayerKeys)   --设置该玩家可以观战所有玩家。
+    
+                        --ugcprint("chenggong");
+                   end
+                end
             end
-        end
+        end  
+    end
+    self.LocalPlayerCat:Empty();
+    self.LocalPlayerHunter:Empty();
 end
 -- function UGCGameMode:ReceiveEndPlay()
  

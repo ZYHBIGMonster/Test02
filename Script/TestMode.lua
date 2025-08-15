@@ -47,6 +47,12 @@ TestMode.TheColor=
 
 }
 
+TestMode.SettlementColor=
+{
+    purple={R=0.556863,G=0.000000,B=1.000000,A=1.000000};
+    Green={R=0.000000,G=1.000000,B=0.000000,A=1.000000};
+    Red={R=1.000000,G=0.000000,B=0.000000,A=1.000000};
+}
 TestMode.GameResultTable={};
 
 TestMode.ColorNums=4;

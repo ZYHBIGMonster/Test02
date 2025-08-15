@@ -9,7 +9,6 @@ function Action_PlayerKillsRecord:Execute()
 
     local PlayerState=UGCGameSystem.GetPlayerStateByPlayerKey(self.VictimKey);
 
-
    -- ugcprint("Kill1");
     local LocalGameState=UGCGameSystem.GameState;
 
@@ -25,9 +24,6 @@ function Action_PlayerKillsRecord:Execute()
 
     end
   --  ugcprint("Kill2");
-
-
-
 
 end
 

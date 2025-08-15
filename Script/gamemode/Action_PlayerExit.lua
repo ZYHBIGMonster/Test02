@@ -14,8 +14,11 @@ function Action_PlayerExit:Execute()
 	if PlayerState.TeamID==TestMode.Camps.Cat then
 
 		UGCGameSystem.GameState.AliveCat=UGCGameSystem.GameState.AliveCat-1;
-		
+		UGCGameSystem.GameState.AliveCatName:Remove(PlayerState.PlayerName);
+		UGCGameSystem.GameState.DeadCatName:Add(PlayerState.PlayerName);
+
 	end
+
 	if PlayerState then
 		local PlayerKeys = UGCTeamSystem.GetPlayerKeysByTeamID(PlayerState.TeamID);
 		print(string.format("Action_PlayerExit:Execute #PlayerKeys[%d]", #PlayerKeys));

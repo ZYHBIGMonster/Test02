@@ -7,18 +7,16 @@ local Action_RedistributeTeams = {
 
 -- 触发器激活时，将执行Action的Execute
 function Action_RedistributeTeams:Execute(...)
-	print(string.format("Action_RedistributeTeams:Execute HunterCount[%s]", self.HunterCount));
+
 
 	local PlayerStates = UGCGameSystem.GetAllPlayerState(false);
-	print(string.format("Action_RedistributeTeams:Execute #PlayerStates[%d]", #PlayerStates));
 
 	if #PlayerStates < self.HunterCount then
-		print(string.format("Error: Action_RedistributeTeams:Execute #PlayerStates[%d] < HunterCount[%d]", #PlayerStates, self.HunterCount));
 		return false;
 	end
 
 
-	if #PlayerStates==TestMode.AllThePlayerNums1 then
+	if #PlayerStates<=TestMode.AllThePlayerNums1 then
 		
 		self.HunterCount=1;
 		
@@ -44,14 +42,10 @@ function Action_RedistributeTeams:Execute(...)
 		if PlayerState then
 			print(string.format("Action_RedistributeTeams:Execute CatPlayerState[%s]", PlayerState.PlayerName));
 			UGCTeamSystem.ChangePlayerTeamID(PlayerState.PlayerKey, TestMode.Camps.Cat);
-			
-
-
 		else
 			print("Error: Action_RedistributeTeams:Execute CatPlayerState is nil!");
 		end		
 	end
-
 	
 	--统计双方人数
 	for Key, TeamID in pairs(TestMode.Camps) do
